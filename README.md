@@ -13,7 +13,7 @@ The program editor allows you to interact with your synthesizer, create, load, m
 
 ### Mouse Actions:
 
-*   Double-click on a gauge to enter a value, then press the "Enter" button to validate or the "Escape" button to cancel.
+*   Double-click on a knob to enter a value, then press the "Enter" button to validate or the "Escape" button to cancel.
 *   Use the mouse wheel to increase or decrease the value of a parameter.
 
 ### Application Buttons:
