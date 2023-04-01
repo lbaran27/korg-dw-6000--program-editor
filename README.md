@@ -1,4 +1,4 @@
-Program Editor for KORG DW-6000
+KORG DW-6000: Program Editor
 -------------------------------
 
 The program editor allows you to interact with your synthesizer, create, load, modify and download programs.
