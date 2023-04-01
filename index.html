@@ -1,63 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-        <title>KORG DW-6000 - Program Editor</title>
-    </head>
-    <body>
-		<div id="controller">
-			<button name="increment" onclick="app.up()">&plus;</button>
-			<button name="decrement" onclick="app.bottom()">&minus;</button>
-			<input type="range" step="1" min="0" orient="vertical">
-		</div>
-
-<div id="container">
-        <div id="midi-settings" style=""></div>
-
-        <div class="bloc manage">
-            <div class="title">PROGRAM</div>
-            <div class="content">
-                <span><button name="load">LOAD</button></span>
-                <span><button name="save">SAVE</button></span>
-                <span><button name="dump">DUMP</button></span>
-            </div>
-        </div>
-
-        <div class="bloc manage name">
-            <div class="title">NAME</div>
-            <input type="text" name="">
-        </div>
-
-        <div id="synthesizer"></div>
-        
-		<div class="presets">
-            <div class="title-wrapper">
-                <div class="title">PRELOAD PROGRAM LIST</div>
-            </div>
-            <div class="presets-content"></div>
-        </div>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title>KORG DW-6000 - Program Editor</title>
+</head>
+<body>
+	<div id="controller">
+		<button name="increment" onclick="app.up()">&plus;</button>
+		<button name="decrement" onclick="app.bottom()">&minus;</button>
+		<input type="range" step="1" min="0" orient="vertical">
 	</div>
 
+	<div id="container">
+		<div id="midi-settings"></div>
 
+		<div class="bloc manage">
+			<div class="title">PROGRAM</div>
+			<div class="content">
+				<span><button name="load">LOAD</button></span>
+				<span><button name="save">SAVE</button></span>
+				<span><button name="dump">DUMP</button></span>
+			</div>
+		</div>
 
-        <!-- SCRIPTS -->
-        <script type="text/javascript" src="js/data/groups.js"></script>
-        <script type="text/javascript" src="js/data/presets.js"></script>
-        <script type="text/javascript" src="js/data/select_jauge_config.js"></script>
-        <script type="text/javascript" src="js/tools.js"></script>
-        <script type="text/javascript" src="js/maths/MathFunctionLinear2D.js"></script>
-        <script type="text/javascript" src="js/maths/Point.js"></script>
-        <script type="text/javascript" src="js/maths/Trigonometry.js"></script>
-        <script type="text/javascript" src="js/synth/Synthesizer.class.js"></script>
-        <script type="text/javascript" src="js/synth/KORG.class.js"></script>
-        <script type="text/javascript" src="js/synth/KORGDW6000.class.js"></script>
-        <script type="text/javascript" src="js/svg/SVG.js"></script>
-        <script type="text/javascript" src="js/svg/SVGArc.js"></script>
-        <script type="text/javascript" src="js/svg/SVGJaugeSelect.js"></script>
-        <script type="text/javascript" src="js/synth/Midi.class.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+		<div class="bloc manage name">
+			<div class="title">NAME</div>
+			<input type="text" name="name">
+		</div>
 
-    </body>
+		<div id="synthesizer"></div>
+
+		<div class="presets">
+			<div class="title-wrapper">
+				<div class="title">PRELOAD PROGRAM LIST</div>
+			</div>
+			<div class="presets-content"></div>
+		</div>
+	</div>
+
+	<!-- SCRIPTS -->
+	<script src="js/data/groups.js"></script>
+	<script src="js/data/presets.js"></script>
+	<script src="js/data/select_jauge_config.js"></script>
+	<script src="js/tools.js"></script>
+	<script src="js/maths/MathFunctionLinear2D.js"></script>
+	<script src="js/maths/Point.js"></script>
+	<script src="js/maths/Trigonometry.js"></script>
+	<script src="js/synth/Synthesizer.class.js"></script>
+	<script src="js/synth/KORG.class.js"></script>
+	<script src="js/synth/KORGDW6000.class.js"></script>
+	<script src="js/svg/SVG.js"></script>
+	<script src="js/svg/SVGArc.js"></script>
+	<script src="js/svg/SVGJaugeSelect.js"></script>
+	<script src="js/synth/Midi.class.js"></script>
+	<script src="js/app.js"></script>
+</body>
 </html>

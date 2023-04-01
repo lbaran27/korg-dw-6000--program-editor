@@ -10,7 +10,8 @@ class Synthesizer {
     /**
      * Initialize.
      */
-    init() {}
+    init() {
+    }
 
     /**
      * Send Sysex.
@@ -34,5 +35,6 @@ class Synthesizer {
         return new Uint8Array(message);
     }
 
-    onMidiMessage(event) {}
+    onMidiMessage(event) {
+    }
 }

@@ -7,14 +7,14 @@ class App {
      */
     init() {
 
-		this.midi = null;
-		
+        this.midi = null;
+
         this.elSynthetiser = document.querySelector("#synthesizer");
         this.elDumpButton = document.querySelector('button[name="dump"]');
         this.elLoadButton = document.querySelector('button[name="load"]');
         this.elSaveButton = document.querySelector('button[name="save"]');
         this.elHtml = document.querySelector("html");
-        this.elName = document.querySelector(".bloc.name input"); // "div.bloc.manage.name > input"
+        this.elName = document.querySelector('input[name="name"]');
         this.selectorCurrentSelect = ".bloc > .content > div.field.selected select";
 
         this.initMidi();
@@ -35,7 +35,7 @@ class App {
                     value += parseInt(select.value) << parseInt(select.getAttribute("data-bit-min"));
                 });
 
-                if (app.midi.synthesizer) {
+                if (app.midi && app.midi.synthesizer) {
                     app.midi.synthesizer.parameterChange(offset, value);
                 }
 
@@ -47,28 +47,30 @@ class App {
                 document.querySelectorAll("div.field.selected").forEach(function (preset) {
                     preset.classList.remove("selected");
                 });
-				field.classList.add("selected");
-				let range = document.querySelector("#controller > input");
-				let select = field.querySelector("select");
-				range.max = select.options.length - 1;
-				range.value = select.selectedIndex
-				function rangeChange(event) {
-					let input = document.querySelector("div.field.selected select");
-					console.log(input.value);
-					if (!input) {
-						return;
-					}
-					if (input.selectedIndex > input.length - 1) {
-						return;
-					}
-					input.selectedIndex = event.target.value;
-					let value = input.selectedIndex;
-					input.value = value;
-					input.dispatchEvent(new CustomEvent("changeValue", {"detail": value}));
-					app.synthesizerParameterChange(input);
-				}
-				range.addEventListener("change", rangeChange);
-				range.addEventListener("input", rangeChange);
+                field.classList.add("selected");
+                let range = document.querySelector("#controller > input");
+                let select = field.querySelector("select");
+                range.max = select.options.length - 1;
+                range.value = select.selectedIndex
+
+                function rangeChange(event) {
+                    let input = document.querySelector("div.field.selected select");
+                    console.log(input.value);
+                    if (!input) {
+                        return;
+                    }
+                    if (input.selectedIndex > input.length - 1) {
+                        return;
+                    }
+                    input.selectedIndex = event.target.value;
+                    let value = input.selectedIndex;
+                    input.value = value;
+                    input.dispatchEvent(new CustomEvent("changeValue", {"detail": value}));
+                    app.synthesizerParameterChange(input);
+                }
+
+                range.addEventListener("change", rangeChange);
+                range.addEventListener("input", rangeChange);
             });
         });
 
@@ -88,22 +90,19 @@ class App {
         this.events();
     };
 
-    events(){
-        // Instanciate ouput.
-        document.addEventListener("midiInstanciateOutput", function (event) {
-            //let midi = event.detail.data.midi;
+    events() {
+        // Instanciate output.
+        document.addEventListener("midiInstanciateOutput", function () {
             app.midi.output.identity();
         });
 
         // Instanciate input.
-        document.addEventListener("midiInstanciateIo", function (event) {
-            //let midi = event.detail.data.midi;
+        document.addEventListener("midiInstanciateIo", function () {
             app.midi.synthesizer = new KORGDW6000(app.midi.input, app.midi.output);
         });
 
         // Desnstanciate input or output.
-        document.addEventListener("midiDesactivateIo", function (event) {
-            // let midi = event.detail.data.midi;
+        document.addEventListener("midiDesactivateIo", function () {
             if (app.midi.synthesizer) {
                 app.midi.synthesizer = null;
             }
@@ -153,18 +152,30 @@ class App {
         this.elHtml.addEventListener("keypress", function (event) {
             switch (event.key) {
                 // keyCode: 107
-                case "+": this.up(); break;
+                case "+":
+                    this.up();
+                    break;
                 // keyCode: 109
-                case "-": this.bottom(); break;
+                case "-":
+                    this.bottom();
+                    break;
             }
         }.bind(this));
 
         this.elHtml.addEventListener("keydown", function (event) {
             switch (event.keyCode) {
-                case 37: this.left(); break;
-                case 38: this.up(); break;
-                case 39: this.right(); break;
-                case 40: this.bottom(); break;
+                case 37:
+                    this.left();
+                    break;
+                case 38:
+                    this.up();
+                    break;
+                case 39:
+                    this.right();
+                    break;
+                case 40:
+                    this.bottom();
+                    break;
             }
         }.bind(this));
 
@@ -186,15 +197,22 @@ class App {
         });
     };
 
-    getValuesByValueType(value_type){
+    getValuesByValueType(value_type) {
         switch (value_type) {
-            case "assign_mode": return ["POLY1", "POLY2", "UNISON"];
-            case "off_on": return ["OFF", "ON"];
-            case "octave": return ["16", "8", "4"];
-            case "waveform": return ["1", "2", "3", "4", "5", "6", "7", "8"];
-            case "interval": return ["1", "-3", "3", "4", "5"];
-            case "kbd_track": return ["OFF", "HALF", "FULL"];
-            case "polarity": return ["+", "-"];
+            case "assign_mode":
+                return ["POLY1", "POLY2", "UNISON"];
+            case "off_on":
+                return ["OFF", "ON"];
+            case "octave":
+                return ["16", "8", "4"];
+            case "waveform":
+                return ["1", "2", "3", "4", "5", "6", "7", "8"];
+            case "interval":
+                return ["1", "-3", "3", "4", "5"];
+            case "kbd_track":
+                return ["OFF", "HALF", "FULL"];
+            case "polarity":
+                return ["+", "-"];
         }
         return [];
     };
@@ -267,7 +285,7 @@ class App {
         }.bind(this));
     };
 
-    initPresets(){
+    initPresets() {
         let pos = 0;
         presets.forEach(function (preset) {
 
@@ -275,7 +293,7 @@ class App {
             let unt = ((pos % 8) + 1) + "";
             let dec = (parseInt(pos / 8) + 1) + "";
 
-            var elPreset = createDiv("preset", [
+            let elPreset = createDiv("preset", [
                 createDiv("number", [dec + unt]),
                 createDiv("title", [values.name])
             ]);
@@ -314,9 +332,15 @@ class App {
                     case 1:
                     case 4:
                         switch (value) {
-                            case 16: value = 0; break;
-                            case 8: value = 1; break;
-                            case 4: value = 2; break;
+                            case 16:
+                                value = 0;
+                                break;
+                            case 8:
+                                value = 1;
+                                break;
+                            case 4:
+                                value = 2;
+                                break;
                         }
                         break;
                     case 13:
@@ -326,17 +350,31 @@ class App {
                         break;
                     case 7:
                         switch (value) {
-                            case 1: value = 0; break;
-                            case 3: value = 2; break;
-                            case 4: value = 3; break;
-                            case 5: value = 4; break;
+                            case 1:
+                                value = 0;
+                                break;
+                            case 3:
+                                value = 2;
+                                break;
+                            case 4:
+                                value = 3;
+                                break;
+                            case 5:
+                                value = 4;
+                                break;
                         }
                         break;
                     case 35:
                         switch (value) {
-                            case "POLY1": value = 0; break;
-                            case "POLY2": value = 1; break;
-                            case "UNISON": value = 2; break;
+                            case "POLY1":
+                                value = 0;
+                                break;
+                            case "POLY2":
+                                value = 1;
+                                break;
+                            case "UNISON":
+                                value = 2;
+                                break;
                         }
                         break;
                 }
@@ -366,7 +404,7 @@ class App {
             value += parseInt(select.value) << parseInt(select.getAttribute("data-bit-min"));
         });
 
-        if (this.midi.synthesizer) {
+        if (this.midi && this.midi.synthesizer) {
             this.midi.synthesizer.parameterChange(offset, value);
         }
     };
@@ -398,7 +436,7 @@ class App {
     };
 
     load(data) {
-        if (this.midi.synthesizer) {
+        if (this.midi && this.midi.synthesizer) {
             this.midi.synthesizer.send(data);
         }
         this.dump(data);

@@ -26,7 +26,6 @@ let SVGJaugeSelect = function (width, height, select, config) {
                 "alignment-baseline": "central",
                 "stroke": "#0f0",
                 "stroke-width": 1,
-                //"fill"				: "#0f0",
                 "style": "user-select:none;",
             },
             "jauge-background": {
@@ -66,7 +65,7 @@ SVGJaugeSelect.prototype.getRadius = function () {
 
 SVGJaugeSelect.prototype.setValue = function (mlf, value) {
 
-    let option = this.select.options[value];
+    let option = this.select.options[parseInt(value)];
 
     let y = mlf.y(value);
     let arc = new SVGArc(this.getCenter(), this.getRadius(), this.config.angles.tmin, y);
@@ -188,7 +187,7 @@ SVGJaugeSelect.prototype.createElement = function () {
 
     this.svg.element.addEventListener("dblclick", function (event) {
         event.preventDefault();
-        let input = document.querySelector('input[type="text"]', me);
+        let input = me.element.querySelector('input[type="text"]');
         if (!input) {
             input = document.createElement("input");
             input.setAttribute("type", "text");

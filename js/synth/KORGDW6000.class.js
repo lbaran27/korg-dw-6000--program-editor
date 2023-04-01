@@ -44,11 +44,21 @@ class KORGDW6000 extends KORG {
                 }
                 //addNotification("success", message + value);
                 break;
-            case 0x41: addNotification("info", message + "PARAMETER CHANGE"); break;
-            case 0x23: addNotification("success", message + "DATA LOAD COMPLETED"); break;
-            case 0x24: addNotification("danger", message + "DATA LOAD ERROR"); break;
-            case 0x21: addNotification("success", message + "WRITE COMPLETED"); break;
-            case 0x22: addNotification("danger", message + "WRITE ERROR"); break;
+            case 0x41:
+                addNotification("info", message + "PARAMETER CHANGE");
+                break;
+            case 0x23:
+                addNotification("success", message + "DATA LOAD COMPLETED");
+                break;
+            case 0x24:
+                addNotification("danger", message + "DATA LOAD ERROR");
+                break;
+            case 0x21:
+                addNotification("success", message + "WRITE COMPLETED");
+                break;
+            case 0x22:
+                addNotification("danger", message + "WRITE ERROR");
+                break;
         }
     }
 

@@ -31,8 +31,6 @@ class Midi {
                 me[setting] = id ? me.access[setting + "s"].get(id) : null;
                 if (me[setting] && setting === 'output') {
                     addEvent('midiInstanciateOutput', {"midi": me});
-                    // me[setting].identity();
-                    // me[setting].send(new Uint8Array([0xf0,0x42,0x40,0xf7]));
                 }
                 if (me[setting] && setting === 'input') {
                     addEvent('midiInstanciateInput', {"midi": me});
